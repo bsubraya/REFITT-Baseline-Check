@@ -138,4 +138,7 @@ def baseline_imp(x):
     return major_miss
 old = baseline_imp(baseline_o)
 new = baseline_imp(baseline_n)
-lis_names
+print(old)
+print(new)
+if (old = new):
+    print(True)
