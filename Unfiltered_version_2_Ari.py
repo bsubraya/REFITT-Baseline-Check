@@ -114,12 +114,13 @@ def baseline_imp(x):
         #print(data_g)
         #print(data_r)
         final = pd.concat([data_g,data_r]).reset_index(drop = True)
-        if (max(final['Date'])- min(final['Date']) < 50) and (len(final) > 5) and (final['Magnitude'].mean( ) <= 18.5) :
+        if (max(final['Date'])- min(final['Date']) < 50) and (len(final) > 5) and (final['Magnitude'].mean( ) <= 18.5 and (min(final['Date'])+30 >= w_time.mjd)) :
             print('Locus_id:',locus_id)
             print('Object_id:',object_id_m)
             print('RA:',ra)
             print('Dec:',dec)
             print(final)
+            final.to_csv('/Users/bhagyasubrayan/Desktop/REFITT/baseline_new_miss/'+str(locus_id)+'.csv',index= False)
             major_miss.append(object_id_m)
             plt.figure(figsize=(5,5))
             plt.axvline(w_time.mjd)
@@ -132,13 +133,14 @@ def baseline_imp(x):
             plt.xlabel('MJD')
             plt.ylabel('magpsf')
             plt.xlim(58849,t.mjd)
+            plt.savefig('/Users/bhagyasubrayan/Desktop/REFITT/baseline_new_miss/'+str(locus_id)+'.png')
             plt.show()
         else:
             continue
     return major_miss
 old = baseline_imp(baseline_o)
-new = baseline_imp(baseline_n)
+#new = baseline_imp(baseline_n)
 print(old)
-print(new)
-if (old = new):
-    print(True)
+#print(new)
+#if (old == new):
+    #print(True)
